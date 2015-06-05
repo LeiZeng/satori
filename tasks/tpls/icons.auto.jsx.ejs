@@ -1,0 +1,8 @@
+var iconInst = (
+<div className='icon-grid'>
+  <% for (var idx = 0; idx < codepoints.length; idx++) {
+  %>  <Icon type='<%= codepoints[idx].name %>' title='<%= codepoints[idx].name %>'/>
+  <% }
+  %></div>
+);
+React.render(iconInst, mountNode);
