@@ -1,3 +1,5 @@
+import music from '../lib/music'
+
 class Note {
   channel = 0
   bar = 0
@@ -26,15 +28,20 @@ class Note {
   }
 }
 class MusicSheet {
+  notes = []
   scores = []
   offset = 0
   speed = 2
   bpb = 4
+  constructor() {
+    music.init()
+  }
   initFromJson(json) {
     this.scores = parseJsonScores(json.scores)
     this.offset = Number(json.offset, 10) || 0
     this.speed = Number(json.bpm, 10) / 60 //bps
     this.bpb = Number(json.bpb, 10) || 4
+    this.music = json.music
     return this
   }
   getSpeed() {
@@ -49,11 +56,25 @@ class MusicSheet {
       }
     })
   }
+  load() {
+    return music.load(this.music)
+  }
+  play() {
+    music.player.load()
+    return music.play()
+  }
+  clear() {
+    this.notes.map(handler => {
+      global.clearTimeout(handler)
+    })
+    this.notes = []
+  }
   start(note, cb) {
-    global.setTimeout(() => {
+    var handler = global.setTimeout(() => {
+      this.notes.shift()
       cb.call(note)
-      console.log(note.bar, note.beat, note.getStartTime(this.speed, this.offset, this.bpb))
     }, note.getStartTime(this.speed, this.offset, this.bpb))
+    this.notes.push(handler)
   }
   loadSheetFromJson(json) {
     return this.initFromJson(json)

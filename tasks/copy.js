@@ -14,6 +14,9 @@ const defaultConfig = {
     {
       'src': 'src/index.html',
       'dest': 'public/'
+    },{
+      'src': 'src/music/*',
+      'dest': 'public/music/'
     }
   ]
 };

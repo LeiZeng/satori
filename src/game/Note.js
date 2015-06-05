@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 const defaultOpts = {
   height: 20,
-  width: 80,
+  width: 100,
   speed: 8,
   maxY: 550
 }

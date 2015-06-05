@@ -9,7 +9,7 @@ class HitBar extends PIXI.Container {
     var bar = new PIXI.Graphics()
     bar.bounds = new PIXI.Rectangle(0,0,width,height)
     bar.boundsPadding = 0
-    bar.beginFill(0xffff00, 0.5)
+    bar.beginFill(0xffff00, 1)
     bar.drawRect(0, 0, width, height)
     bar.endFill()
     this._bar = new PIXI.Sprite(bar.generateTexture())
